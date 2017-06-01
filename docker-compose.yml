@@ -1,0 +1,17 @@
+app:
+  build: .
+  links:
+    - memcached
+  environment:
+    - HOSTNAME=memcached
+    - PORT=11211
+
+test:
+  build: .
+  dockerfile: Dockerfile.test
+  volumes:
+    - ./build:/build
+
+memcached:
+  image: memcached:alpine
+  command: memcached -m 1000
